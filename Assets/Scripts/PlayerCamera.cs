@@ -2,29 +2,21 @@ using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
 {
-    [SerializeField] private Transform player; // Reference to player transform
-    private float highestY; // Track highest Y the player has reached
+    [SerializeField] Transform player;
+    float maxY;
 
     void Start()
     {
-        if (player == null)
-        {
-            Debug.LogError("Player not assigned to CameraFollow script!");
-            return;
-        }
-
-        highestY = transform.position.y;
+        if (player == null) return;
+        maxY = transform.position.y;
     }
 
     void LateUpdate()
     {
-        if (player.position.y > highestY)
+        if (player.position.y > maxY)
         {
-            highestY = player.position.y;
-
-            // Follow player only upwards
-            transform.position = new Vector3(transform.position.x, highestY, transform.position.z);
+            maxY = player.position.y;
+            transform.position = new Vector3(transform.position.x, maxY, transform.position.z);
         }
     }
 }
-

@@ -2,78 +2,39 @@ using UnityEngine;
 
 public class PlayerControls : MonoBehaviour
 {
-    [SerializeField] private Rigidbody2D rb; // Reference to the Rigidbody2D component
-    [SerializeField] private float moveSpeed = 5f; // Horizontal movement speed
-    [SerializeField] private float jumpForce = 10f; // Force applied when jumping off a platform
-    [SerializeField] private float fallThreshold = -10f; // Y position below which the player dies
-    [SerializeField] private float screenWrapOffset = 0.5f; // Tweak based on sprite width
-
-    private float horizontalInput;
+    [SerializeField] float moveSpeed = 5f;
+    [SerializeField] float jumpForce = 10f;
+    Rigidbody2D rb;
 
     void Start()
     {
-        if (rb == null) rb = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
-        // Get input for horizontal movement
-        horizontalInput = Input.GetAxis("Horizontal");
+        float x = Input.GetAxis("Horizontal");
+        rb.linearVelocity = new Vector2(x * moveSpeed, rb.linearVelocity.y);
 
-        // Optional: Wrap player around the screen
-        ScreenWrap();
+        HandleScreenWrap();
+    }
 
-        // Check if player falls below threshold
-        if (transform.position.y < fallThreshold)
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.relativeVelocity.y <= 0 && col.collider.CompareTag("Platform"))
         {
-            Die();
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
         }
     }
 
-    void FixedUpdate()
+    void HandleScreenWrap()
     {
-        // Apply horizontal movement
-        rb.linearVelocity = new Vector2(horizontalInput * moveSpeed, rb.linearVelocity.y);
-    }
+        float halfWidth = Camera.main.orthographicSize * Camera.main.aspect;
+        Vector3 pos = transform.position;
 
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.relativeVelocity.y <= 0f)
-        {
-            if (collision.collider.CompareTag("Platform"))
-            {
-                Jump();
-            }
-        }
-    }
+        if (pos.x > halfWidth) pos.x = -halfWidth;
+        if (pos.x < -halfWidth) pos.x = halfWidth;
 
-    void Jump()
-    {
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-    }
-
-    void Die()
-    {
-        // Restart game or trigger game over logic
-        Debug.Log("Player Died");
-        // For example:
-        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
-    void ScreenWrap()
-    {
-        Vector3 newPosition = transform.position;
-        float screenHalfWidth = Camera.main.orthographicSize * Camera.main.aspect;
-
-        if (transform.position.x > screenHalfWidth + screenWrapOffset)
-        {
-            newPosition.x = -screenHalfWidth - screenWrapOffset;
-        }
-        else if (transform.position.x < -screenHalfWidth - screenWrapOffset)
-        {
-            newPosition.x = screenHalfWidth + screenWrapOffset;
-        }
-
-        transform.position = newPosition;
+        transform.position = pos;
     }
 }
