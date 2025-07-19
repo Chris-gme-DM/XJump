@@ -2,39 +2,26 @@ using UnityEngine;
 
 public class PlayerControls : MonoBehaviour
 {
-    [SerializeField] float moveSpeed = 5f;
-    [SerializeField] float jumpForce = 10f;
-    Rigidbody2D rb;
+     public float moveSpeed = 5f;
+     public RigidBody2D rb;
 
-    void Start()
+    private float moveX;
+
+    void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        rb getcomponent<Rigidbody2D>();
     }
+
 
     void Update()
     {
-        float x = Input.GetAxis("Horizontal");
-        rb.linearVelocity = new Vector2(x * moveSpeed, rb.linearVelocity.y);
-
-        HandleScreenWrap();
+        moveX = Input.GetAxis("Horizontal") + moveSpeed;
     }
 
-    void OnCollisionEnter2D(Collision2D col)
+    private void fixedupdate()
     {
-        if (col.relativeVelocity.y <= 0 && col.collider.CompareTag("Platform"))
-        {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-        }
-    }
-
-    void HandleScreenWrap()
-    {
-        float halfWidth = Camera.main.orthographicSize * Camera.main.aspect;
-        Vector3 pos = transform.position;
-
-        if (pos.x > halfWidth) pos.x = -halfWidth;
-        if (pos.x < -halfWidth) pos.x = halfWidth;
-
-        transform.position = pos;
+        vector2 veloctity = rb.velocity;
+        velocity.x = moveX;
+        rb.velocity = velocity;
     }
 }

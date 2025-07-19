@@ -2,21 +2,15 @@ using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
 {
-    [SerializeField] Transform player;
-    float maxY;
+    public Transform target; 
 
-    void Start()
+    private void LateUpdate()
     {
-        if (player == null) return;
-        maxY = transform.position.y;
-    }
-
-    void LateUpdate()
-    {
-        if (player.position.y > maxY)
+        if (target.position.y > transform.position.y)
         {
-            maxY = player.position.y;
-            transform.position = new Vector3(transform.position.x, maxY, transform.position.z);
+            Vector3 newPosition = new Vector3(transform.position.x, target.position.y, transform.position.z);
+            transform.position = newPosition;
         }
     }
+
 }
