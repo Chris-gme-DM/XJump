@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
 {
-    public Transform target; 
+    public Transform target;
 
     private void LateUpdate()
     {

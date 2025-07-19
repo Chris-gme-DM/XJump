@@ -2,26 +2,24 @@ using UnityEngine;
 
 public class PlayerControls : MonoBehaviour
 {
-     public float moveSpeed = 5f;
-     public RigidBody2D rb;
-
+    public float moveSpeed = 5f;
     private float moveX;
+    private Rigidbody2D rb;
 
     void Awake()
     {
-        rb getcomponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>(); // Correctly get Rigidbody2D component
     }
-
 
     void Update()
     {
-        moveX = Input.GetAxis("Horizontal") + moveSpeed;
+        moveX = Input.GetAxis("Horizontal") * moveSpeed; // Multiply, not add
     }
 
-    private void fixedupdate()
+    void FixedUpdate()
     {
-        vector2 veloctity = rb.velocity;
+        Vector2 velocity = rb.linearVelocity;
         velocity.x = moveX;
-        rb.velocity = velocity;
+        rb.linearVelocity = velocity;
     }
 }
