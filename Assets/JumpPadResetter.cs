@@ -20,8 +20,6 @@ public class JumpPadResetter : MonoBehaviour
     private void Start()
     {
         resetDistance *= jumpPadParents.transform.childCount / 3; // Adjust reset distance based on the number of JumpPads
-        initialResetDistance = resetDistance + howMuchMore; // Store the initial reset distance
-        MRDB_Coroutine = StartCoroutine(MakeResetDistanceBigger(increment, delay)); // Increase reset distance gradually
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -31,16 +29,6 @@ public class JumpPadResetter : MonoBehaviour
         {
             //Debug.Log("JumpPad detected: " + collision.gameObject.name);
             collision.gameObject.GetComponent<JumpPad>().Reset(resetDistance, offset, minX, maxX);
-        }
-    }
-
-    private IEnumerator MakeResetDistanceBigger(float increment, float dlay)
-    {
-        while (resetDistance < initialResetDistance) { 
-            Debug.Log("Current resetdistance: " + resetDistance + " and initialResetDistance: " + initialResetDistance);
-
-            resetDistance += increment;
-            yield return new WaitForSeconds(dlay);
         }
     }
 
