@@ -2790,6 +2790,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: JumpPad
       objectReference: {fileID: 0}
+    - target: {fileID: 4920258108047228920, guid: d9fc203fb6a601843b9227af708dc637, type: 3}
+      propertyPath: soundDefinition
+      value: 
+      objectReference: {fileID: 11400000, guid: 1c9d1233a42561641acdd4003c94e98d, type: 2}
     - target: {fileID: 5412836543389099550, guid: d9fc203fb6a601843b9227af708dc637, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.34999996

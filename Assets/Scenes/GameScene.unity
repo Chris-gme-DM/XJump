@@ -151,12 +151,13 @@ MonoBehaviour:
   masterMixer: {fileID: 24100000, guid: fd26bb7bf3c2d1646b781e7db1af673b, type: 2}
   musicVolumeParam: MusicVolume
   sfxVolumeParam: SFXVolume
-  musicAudioSource: {fileID: 0}
+  musicAudioSource: {fileID: -8937574766043331680, guid: fc050d4bd51004f46bd1756fc02dd747, type: 3}
   musicMixerGroup: {fileID: 3341579665426566529, guid: fd26bb7bf3c2d1646b781e7db1af673b, type: 2}
-  sfxAudioSourcePrefab: {fileID: 0}
+  sfxAudioSourcePrefab: {fileID: 7048868216063306749, guid: 74e51c1f862f53e43a178798471f56e1, type: 3}
   sfxPoolSize: 10
   sfxMixerGroup: {fileID: -3647759855882188126, guid: fd26bb7bf3c2d1646b781e7db1af673b, type: 2}
-  allSoundDefinitions: []
+  allSoundDefinitions:
+  - {fileID: 11400000, guid: 1c9d1233a42561641acdd4003c94e98d, type: 2}
 --- !u!4 &16179457
 Transform:
   m_ObjectHideFlags: 0
@@ -1548,7 +1549,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 622352809}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1966776650}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: ToggleOptionsPanel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &622352809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4670,8 +4683,8 @@ MonoBehaviour:
   scoreOptionsPanel: {fileID: 189210073}
   soundOptionsSlider: {fileID: 2030365805}
   scoreValueText: {fileID: 1046854910}
-  scoreValueMultiplier: 1
-  playerTransform: {fileID: 0}
+  scoreValueMultiplier: 23
+  playerTransform: {fileID: 1762674829}
 --- !u!4 &1966776651
 Transform:
   m_ObjectHideFlags: 0

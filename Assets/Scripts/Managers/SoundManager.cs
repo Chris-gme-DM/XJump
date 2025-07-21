@@ -23,8 +23,8 @@ public class SoundManager : MonoBehaviour
     [Header("Sound Definitions")]
     [SerializeField] private List<SoundDefinition> allSoundDefinitions;
 
-    readonly private Dictionary<string, SoundDefinition> soundDictionary = new();
-    readonly private Queue<AudioSource> sfxAudioSourcePool;
+    private Dictionary<string, SoundDefinition> soundDictionary = new();
+    private Queue<AudioSource> sfxAudioSourcePool = new();
     #region Initialization
     private void Awake()
     {
