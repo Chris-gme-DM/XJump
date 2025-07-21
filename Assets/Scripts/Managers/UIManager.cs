@@ -1,41 +1,8 @@
 using UnityEngine;
-<<<<<<< HEAD
 using UnityEngine.UIElements;
-using static UnityEngine.Rendering.DebugUI;
-
-public class UIManager : MonoBehaviour
-{
-    /// <summary>
-    /// References for Canvas Elements, Set in Inspector and copy Canvas into GameScene
-    /// References: OptionPanel, TitlePanel, ScorePanel
-    /// </summary>
-    [Header("Canvas References")]
-    [SerializeField] private Canvas canvas;
-    [SerializeField] private Panel titlePanel;
-    [SerializeField] private Panel optionsPanel;
-    [SerializeField] private Panel scorePanel;
-
-    [Header("OptionsPanels")]
-    [SerializeField] private Panel musicSettingsPanel;
-    [SerializeField] private Panel soundSettingsPanel;
-
-    // Internal References
-    private int score;
-    private int musicVloume;
-    private int soundVloume;
-
-    // Public Getter for SoundSettings
-    [HideInInspector] public int MusicVolume => musicVloume;
-    [HideInInspector] public int SoundVolume => soundVloume;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-=======
 using TMPro;
-using UnityEngine.UI;
+
+
 /// <summary>
 /// This script is managing the entire UI
 /// Maybe we can connect he game to a player ID automatically if we ever implement a Save for the game or to track Highscores, which can be displayed in the Main Menu
@@ -61,17 +28,12 @@ public class UIManager : MonoBehaviour
 
     [Header("ScorePanel")]
     [SerializeField] private TextMeshProUGUI scoreValueText;
->>>>>>> 3e4b4f4 (UI feature rebuild)
 
     // Update is called once per frame
     void Update()
     {
-<<<<<<< HEAD
-
-=======
         DisplayScore();
         MusicOptionValue();
->>>>>>> 3e4b4f4 (UI feature rebuild)
     }
     #region Display UI Elements
     /// <summary>
