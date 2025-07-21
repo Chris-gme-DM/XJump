@@ -103,6 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62fd110cb026c6342b93317617461ff3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundDefinition: {fileID: 11400000, guid: 1c9d1233a42561641acdd4003c94e98d, type: 2}
   jumpForce: 10
 --- !u!50 &5566207297336148110
 Rigidbody2D:

@@ -7,10 +7,10 @@ public class SoundDefinition : ScriptableObject
 {
     [SerializeField] private string id;// Use names like "JumpSound" etc. to define sounds
     [SerializeField] private AudioClip clip;
-    [Range(0f, 1f)] private float volume = 1f;
+    [SerializeField] [Range(0f, 1f)] private float volume = 1f;
     // For Pitch Randomization
-    [Range(0f, 2f)] private float minPitch = 0.9f;
-    [Range(0f, 2f)] private float maxPitch = 1.1f;
+    [SerializeField] [Range(0f, 2f)] private float minPitch = 0.9f;
+    [SerializeField] [Range(0f, 2f)] private float maxPitch = 1.1f;
 
     [SerializeField] bool loop = false;
    

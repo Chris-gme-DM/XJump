@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 public class JumpPad : MonoBehaviour
 {
+    [SerializeField] private SoundDefinition soundDefinition;
     public void Reset(float distance, float offset, float minX, float maxX)
     {
         //Debug.Log("JumpPad Reset Called");
@@ -28,6 +29,7 @@ public class JumpPad : MonoBehaviour
                 velocity.y = jumpForce; // Set the vertical velocity to the jump force
                 rb.linearVelocity = velocity; 
             }
+            SoundManager.Instance.PlaySFX(soundDefinition.ID);
         }
     }
 }
