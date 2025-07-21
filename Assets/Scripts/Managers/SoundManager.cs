@@ -25,6 +25,7 @@ public class SoundManager : MonoBehaviour
 
     readonly private Dictionary<string, SoundDefinition> soundDictionary = new();
     readonly private Queue<AudioSource> sfxAudioSourcePool;
+    #region Initialization
     private void Awake()
     {
         if (Instance == null)
@@ -61,7 +62,8 @@ public class SoundManager : MonoBehaviour
             musicAudioSource.outputAudioMixerGroup = musicMixerGroup;
         }
     }
-
+    #endregion
+    #region Play and Stop functions
     /// <summary>
     /// Plays sound effect by its ID
     /// </summary>
@@ -120,6 +122,8 @@ public class SoundManager : MonoBehaviour
             musicAudioSource.Stop();
         }
     }
+    #endregion
+    #region Setting Functions and helpers
     /// <summary>
     /// Set the music volume
     /// </summary>
@@ -129,12 +133,26 @@ public class SoundManager : MonoBehaviour
         SetVolume(masterMixer, musicVolumeParam, volume);
     }
     /// <summary>
+    /// Gets the current music volume normalized (0.0 to 1.0).
+    /// </summary>
+    public float GetMusicVolumeNormalized()
+    {
+        return GetVolumeNormalized(masterMixer, musicVolumeParam);
+    }
+    /// <summary>
     /// Set Sound Volume
     /// </summary>
     /// <param name="volume"> Volume for the sound (0 - 1f) </param>
     public void SetSoundVolume(float volume)
     {
         SetVolume(masterMixer, sfxVolumeParam, volume);
+    }
+    /// <summary>
+    /// Gets the current SFX volume normalized (0.0 to 1.0).
+    /// </summary>
+    public float GetSFXVolumeNormalized()
+    {
+        return GetVolumeNormalized(masterMixer, sfxVolumeParam);
     }
     /// <summary>
     /// Helper method to set the volume of music and sound respectively
@@ -148,4 +166,22 @@ public class SoundManager : MonoBehaviour
         float dbVolume = Mathf.Log10(Mathf.Max(volume, 0.0001f))*20;
         mixer.SetFloat(parameterName, dbVolume);
     }
+    /// <summary>
+    /// Helper to get volume from an AudioMixer parameter and normalize it (0.0 to 1.0).
+    /// </summary>
+    /// <param name="mixer">The AudioMixer to query.</param>
+    /// <param name="parameterName">The name of the exposed parameter on the mixer.</param>
+    /// <returns>Normalized volume (0.0 to 1.0).</returns>
+    private float GetVolumeNormalized(AudioMixer mixer, string parameterName)
+    {
+        float dbVolume;
+        if (mixer.GetFloat(parameterName, out dbVolume))
+        {
+            // Convert decibels back to a normalized (0-1) range.
+            // Assuming -80dB is silence and 0dB is max.
+            return Mathf.Pow(10, dbVolume / 20);
+        }
+        return 0f; // Return 0 if parameter not found
+    }
+    #endregion
 }

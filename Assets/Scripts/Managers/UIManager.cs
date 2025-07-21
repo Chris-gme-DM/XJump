@@ -32,6 +32,11 @@ public class UIManager : MonoBehaviour
     // To Enrich UX i made a multiplier here because big number = good player, much fun
     [SerializeField] private float scoreValueMultiplier = 1f;
 
+    [Header("Player")]
+    // Drag player into this field so it can track his position for scoring purposes. OR make that value readable
+    [SerializeField] private Transform playerTransform;
+    private float currentHighestY = 0;
+
     private void Awake()
     {
         if (Instance == null)
@@ -40,13 +45,27 @@ public class UIManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
 
         }
+
+        // Initialize Slider Values
+        if (SoundManager.Instance != null)
+        {
+            musicOptionSlider.value = SoundManager.Instance.GetMusicVolumeNormalized();
+            soundOptionsSlider.value = SoundManager.Instance.GetSFXVolumeNormalized(); 
+        }
+        else
+        {
+            // Set reasonable default values
+            musicOptionSlider.value = 1.0f;
+            soundOptionsSlider.value = 1.0f;
+        }
+        // Add Listeners to the setting functions of SoundManager
+        musicOptionSlider.onValueChanged.AddListener(SetMusicVolumeFromSlider);
+        soundOptionsSlider.onValueChanged.AddListener(SetSFXVolumeFromSlider);
     }
     // Update is called once per frame
     void Update()
     {
         DisplayScore();
-        MusicOptionValue();
-        SoundOptionValue();
     }
     #region Display UI Elements
     /// <summary>
@@ -55,20 +74,28 @@ public class UIManager : MonoBehaviour
     private void DisplayScore()
     {
         // Track the player "y-position"
+        if (playerTransform != null)
+        {
+            if (playerTransform.position.y > currentHighestY)
+            {
+                currentHighestY = playerTransform.position.y;
+            }
+            scoreValueText.text = $"{ (int)(currentHighestY * scoreValueMultiplier) }";
+        }
         // calculate the highest position the player reached in game
         // Display that number, maybe with  a multiplier to enrich player feeling
     }
-    private void MusicOptionValue()
+    private void SetMusicVolumeFromSlider(float value)
     {
-        // Read the slider input
+        // Read the slider input, onValueChanged in Initialization already does that
         // Set the music volume accordingly
-        // Set the text of the valueText accordingly
+        SoundManager.Instance.SetMusicVolume(value);
     }
-    private void SoundOptionValue()
+    private void SetSFXVolumeFromSlider(float value)
     {
         // Read the slider input
         // Set the sound volume accordingly
-        // Set the text of the valueText accordingly
+        SoundManager.Instance.SetSoundVolume(value);
     }
     #endregion
     #region DisplayUI
