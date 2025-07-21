@@ -104,7 +104,7 @@ public class UIManager : MonoBehaviour
     /// </summary>
     public void ToggleOptionsPanel()
     {
-        optionsPanel.SetActive(!optionsPanel);
+        optionsPanel.SetActive(!optionsPanel.activeSelf);
     }
     #endregion
 }
