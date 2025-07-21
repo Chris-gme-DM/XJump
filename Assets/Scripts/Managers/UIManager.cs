@@ -29,6 +29,8 @@ public class UIManager : MonoBehaviour
 
     [Header("ScorePanel")]
     [SerializeField] private TextMeshProUGUI scoreValueText;
+    // To Enrich UX i made a multiplier here because big number = good player, much fun
+    [SerializeField] private float scoreValueMultiplier = 1f;
 
     private void Awake()
     {
@@ -52,7 +54,7 @@ public class UIManager : MonoBehaviour
     /// </summary>
     private void DisplayScore()
     {
-        // Track the player "position"
+        // Track the player "y-position"
         // calculate the highest position the player reached in game
         // Display that number, maybe with  a multiplier to enrich player feeling
     }
