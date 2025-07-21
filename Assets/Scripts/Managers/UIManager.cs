@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
 using TMPro;
 
@@ -10,6 +11,8 @@ using TMPro;
 /// </summary>
 public class UIManager : MonoBehaviour
 {
+    public static UIManager Instance {  get; private set; }
+
     // References to be set in inspector
     [Header("MainPanels")]
     [SerializeField] private Canvas canvas;
@@ -18,22 +21,30 @@ public class UIManager : MonoBehaviour
 
     [Header("MusicOptionsPanel")]
     [SerializeField] private GameObject musicOptionsPanel;
-    [SerializeField] private Slider musicOptionSlider;
-    [SerializeField] private TextMeshProUGUI musicOptionValueText;
+    [SerializeField] private UnityEngine.UI.Slider musicOptionSlider;
 
     [Header("SoundOptionsPanel")]
     [SerializeField] private GameObject scoreOptionsPanel;
-    [SerializeField] private Slider soundOptionsSlider;
-    [SerializeField] private TextMeshProUGUI soundOptionsValueText;
+    [SerializeField] private UnityEngine.UI.Slider soundOptionsSlider;
 
     [Header("ScorePanel")]
     [SerializeField] private TextMeshProUGUI scoreValueText;
 
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+
+        }
+    }
     // Update is called once per frame
     void Update()
     {
         DisplayScore();
         MusicOptionValue();
+        SoundOptionValue();
     }
     #region Display UI Elements
     /// <summary>
@@ -51,7 +62,7 @@ public class UIManager : MonoBehaviour
         // Set the music volume accordingly
         // Set the text of the valueText accordingly
     }
-    private void ScoreOptionValue()
+    private void SoundOptionValue()
     {
         // Read the slider input
         // Set the sound volume accordingly
@@ -62,7 +73,7 @@ public class UIManager : MonoBehaviour
     /// <summary>
     /// The following methods handle the displaying the element Of the option Panél and may be expected to be further consrtucted if we decide upon a Main Menu Scene
     /// </summary>
-    private void ToggleOptionsPanel()
+    public void ToggleOptionsPanel()
     {
         optionsPanel.SetActive(!optionsPanel);
     }
