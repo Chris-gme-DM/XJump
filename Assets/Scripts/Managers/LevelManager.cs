@@ -10,10 +10,10 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        int distance = 5;
+        int distance = 0;
         foreach(Transform jumpPad in JumpPadsParent.transform)
         {
-            distance += 5;
+            distance += 2;
             jumpPad.gameObject.GetComponent<JumpPad>().Reset(distance, 5f, -18f, 18f);
         }
     }

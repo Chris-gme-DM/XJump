@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6508998232027505341}
   m_Layer: 0
   m_Name: JumpPad
-  m_TagString: Untagged
+  m_TagString: JumpPad
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 5.31, z: 0}
-  m_LocalScale: {x: 0.35000002, y: 1, z: 1}
+  m_LocalScale: {x: 0.34999996, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -146,7 +146,7 @@ PlatformEffector2D:
   m_RotationalOffset: -90
   m_UseOneWay: 1
   m_UseOneWayGrouping: 0
-  m_SurfaceArc: 120
+  m_SurfaceArc: 175
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
@@ -187,8 +187,8 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
   m_Points:
-  - {x: -0.50000006, y: 0}
-  - {x: 0.50000006, y: 0}
+  - {x: 0.1761551, y: 0.9788938}
+  - {x: 0.17615512, y: -0.9788938}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0

@@ -19,7 +19,7 @@ public class JumpPadResetter : MonoBehaviour
 
     private void Start()
     {
-        resetDistance *= jumpPadParents.transform.childCount / 2; // Adjust reset distance based on the number of JumpPads
+        resetDistance *= jumpPadParents.transform.childCount / 3; // Adjust reset distance based on the number of JumpPads
         initialResetDistance = resetDistance + howMuchMore; // Store the initial reset distance
         MRDB_Coroutine = StartCoroutine(MakeResetDistanceBigger(increment, delay)); // Increase reset distance gradually
     }
