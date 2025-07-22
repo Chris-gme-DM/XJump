@@ -158,6 +158,9 @@ MonoBehaviour:
   sfxMixerGroup: {fileID: -3647759855882188126, guid: fd26bb7bf3c2d1646b781e7db1af673b, type: 2}
   allSoundDefinitions:
   - {fileID: 11400000, guid: 1c9d1233a42561641acdd4003c94e98d, type: 2}
+  - {fileID: 11400000, guid: bf463fbc862a03c429c5cfdc7b31a90d, type: 2}
+  - {fileID: 11400000, guid: 21332842c841a9346af4bc32675431b1, type: 2}
+  - {fileID: 11400000, guid: d985b5276143e064eabb4e3ae7e38805, type: 2}
 --- !u!4 &16179457
 Transform:
   m_ObjectHideFlags: 0

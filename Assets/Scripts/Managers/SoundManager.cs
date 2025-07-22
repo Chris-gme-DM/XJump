@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance { get; private set; }
@@ -25,6 +26,8 @@ public class SoundManager : MonoBehaviour
 
     private Dictionary<string, SoundDefinition> soundDictionary = new();
     private Queue<AudioSource> sfxAudioSourcePool = new();
+    private List<SoundDefinition> musicSoundDefinitions = new();
+
     #region Initialization
     private void Awake()
     {
@@ -36,6 +39,10 @@ public class SoundManager : MonoBehaviour
         }
         else
             Destroy(gameObject);
+    }
+    private void Start()
+    {
+        PlayRandomMusic();
     }
     private void InitializeSoundManager()
     {
@@ -56,8 +63,13 @@ public class SoundManager : MonoBehaviour
             sfxAudioSourcePool.Enqueue(sfxSource);
 
         }
+        // Initialize musicSoundDefinitions list by filtering 'Type'
+        musicSoundDefinitions = allSoundDefinitions
+            .Where(sd => sd.Type == SoundDefinition.SoundType.Music)
+            .ToList();
+
         // Configure music audio source
-        if(musicAudioSource != null && musicMixerGroup != null)
+        if (musicAudioSource != null && musicMixerGroup != null)
         {
             musicAudioSource.outputAudioMixerGroup = musicMixerGroup;
         }
@@ -112,6 +124,17 @@ public class SoundManager : MonoBehaviour
             musicAudioSource.Play();
         }
     }
+    /// <summary>
+    /// Plays a random music track from the defined music SoundDefinitions.
+    /// </summary>
+    public void PlayRandomMusic()
+    {
+        int randomIndex = Random.Range(0, musicSoundDefinitions.Count);
+        SoundDefinition randomMusicDef = musicSoundDefinitions[randomIndex];
+
+        PlayMusic(randomMusicDef.ID);
+    }
+
     /// <summary>
     /// Stops the currently playing music.
     /// </summary>

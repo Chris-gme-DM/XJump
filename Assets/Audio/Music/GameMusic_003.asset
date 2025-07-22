@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: GameMusic_003
   m_EditorClassIdentifier: 
   id: GameMusic003
-  clip: {fileID: 0}
+  clip: {fileID: 8300000, guid: 784c72e8a6c714313ab10502bf157e1b, type: 3}
   volume: 1
   minPitch: 0.9
   maxPitch: 1.1
   loop: 0
+  type: 1
